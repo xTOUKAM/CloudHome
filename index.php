@@ -15,5 +15,13 @@
     <?php
         require_once('src/includes/header.php');
     ?>
+
+    <footer>
+        <?php
+            //require_once('src/includes/footer.php');
+        ?>
+    </footer>
+    <!-- Insertion des scripts -->
+    <script src="src/assets/js/header.js"></script>
 </body>
 </html>
