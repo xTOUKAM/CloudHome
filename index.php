@@ -7,8 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel=stylesheet href="src/assets/css/header.css">
-    <link rel=stylesheet href="src/assets/css/footer.css">
+    <link rel=stylesheet href="src/assets/css/inc.css">
     <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
     <title>Accueil</title>
 </head>
@@ -23,6 +22,7 @@
         ?>
     </footer>
     <!-- Insertion des scripts -->
-    <script src="src/assets/js/header.js"></script>
+    <script src="src/assets/js/inc.js"></script>
+    <script src="src/assets/js/darkMode.js"></script>
 </body>
 </html>
