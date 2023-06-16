@@ -3,35 +3,95 @@
     require_once("../config/bdd.php");
 
     // On initialise les variables
-    $prenom = "";
-    $nom = "";
-    $email = "";
-    $password = "";
+    $prenom = $_POST["prenom"];
+    $nom = $_POST["nom"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $confirm_password = $_POST["confirm_password"];
+    $admin = 0;
 
-    if(isset($_POST["prenom"]) && !empty($_POST["prenom"]) && isset($_POST["nom"]) && !empty($_POST["nom"]) && isset($_POST["email"]) && !empty($_POST["email"]) && isset($_POST["password"]) && !empty($_POST["password"])) {
-        $prenom = htmlspecialchars($_POST["prenom"]);
-        $nom = htmlspecialchars($_POST["nom"]);
-        $email = htmlspecialchars($_POST["email"]);
-        $password = htmlspecialchars($_POST["password"]);
-
-        echo "<PRE>";
-        echo $prenom . "<br>" . $nom . "<br>" . $email . "<br>" . $password . "<br>";
-        echo "</PRE>";
-
-        // On vérifie si l'utilisateur existe dans la base de données
-        $check = $bdd->prepare("SELECT com_nom, com_prenom, com_mail, com_mdp FROM compte WHERE com_mail = ?");
-        $check->execute([$email]);
-        $data = $check->fetch();
-        $row = $check->rowCount();
-
-        // Si la requête renvoie un 0 alors l'utilisateur n'existe pas dans la base de données
-        if($row == 0){ 
-            $stm = $bdd->prepare("INSERT INTO compte(com_nom, com_prenom, com_mail, com_mdp) VALUES (?, ?, ?, ?)");
-            $stm->execute([$prenom, $nom, $email, $password]);
-            header("Location: ../index.php?reg_err=success");
-            die();
+    // On vérifie que les variables ne sont pas vides
+    if (isset($_POST["prenom"])) {
+        if (empty($_POST["prenom"])) {
+            $prenom_message = "Ce champs doit être complété.";
+        } elseif (!preg_match("/^[[:alpha:]ÀÂÄÉÈÊËÏÎÔÖÙÛÜŸÇàâäéèêëïîôöùûüÿç\-\s]+$/i", $_POST["prenom"])) {
+            $prenom_message = "Ce champs doit contenir que des lettres.";
         } else {
-            header("Location: ../index.php?reg_err=email");
-            die();
+            $prenom = htmlspecialchars($_POST["prenom"]);
         }
     }
+
+    if (isset($_POST["nom"])) {
+        if (empty($_POST["nom"])) {
+            $nom_message = "Ce champs doit être complété.";
+        } elseif (!preg_match("/^[[:alpha:]ÀÂÄÉÈÊËÏÎÔÖÙÛÜŸÇàâäéèêëïîôöùûüÿç\-\s]+$/i", $_POST["nom"])) {
+            $nom_message = "Ce champs doit contenir que des lettres.";
+        }
+        $nom = htmlspecialchars($_POST["nom"]);
+    }
+
+    if (isset($_POST["email"])) {
+        if (empty($_POST["email"])) {
+            $mail_message = "Ce champs doit être complété.";
+        } elseif (!preg_match("/^[a-zA-Z.]+@[a-zA-Z]+\.[a-zA-Z]+$/i", $_POST["email"])) {
+            $mail_message = "Entrez une adresse mail valide. Exemple : \"exemple.test@gmail.com\"";
+        } else {
+            $mail = htmlspecialchars(strtolower($_POST["email"]));
+        }
+    }
+
+    if (isset($_POST["password"])) {
+        if (empty($_POST["password"])) {
+            $motDePasse_message = "Ce champs doit être complété.";
+        } else {
+            $motDePasse = sha1(htmlspecialchars($_POST["password"]));
+        }
+    }
+
+    if (isset($_POST["confirm_password"])) {
+        if (empty($_POST["confirm_password"])) {
+            $motDePasseVerif_message = "Ce champs doit être complété.";
+        } elseif ($_POST["confirm_password"] != $_POST["password"]) {
+            $motDePasseVerif_message = "Les mots de passe doivent correspondre.";
+        }
+    }
+
+    // On fait un système de vérification pour vérifier que l'utilisateur n'existe pas déjà
+    function verifCompteExist($email) {
+        global $bdd;
+        $req = $bdd->prepare("SELECT * FROM compte WHERE com_mail = :email");
+        $req->execute(array(
+            "email" => $email
+        ));
+        $result = $req->fetch();
+        return $result;
+    }
+
+    if (verifCompteExist($email)) {
+        $email_message = "Ce compte existe déjà.";
+    }
+
+    // On vérifie que les variables ne sont pas vides
+    if (!empty($prenom) && !empty($nom) && !empty($email) && !empty($password) && !empty($confirm_password)) {
+        // On prépare la requête
+        $req = $bdd->prepare("INSERT INTO compte (com_prenom, com_nom, com_mail, com_mdp, com_admin) VALUES (:prenom, :nom, :email, :password, :admin)");
+
+        // On exécute la requête
+        $req->execute(array(
+            "prenom" => $prenom,
+            "nom" => $nom,
+            "email" => $email,
+            "password" => $password,
+            "admin" => $admin
+        ));
+
+        // On créé une variable de session
+        session_start();
+        $_SESSION["email"] = $email;
+
+        // On redirige l'utilisateur vers la page de connexion
+        
+    } else {
+        echo "Les variables ne sont pas renseignées !";
+    }
+?>

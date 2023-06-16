@@ -9,6 +9,7 @@
     try {
         $bdd = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
         $bdd->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        echo "Connexion à la base $dbname réussie !";
     } catch (PDOException $e) {
         die("Erreur : " . $e->getMessage());
     }
