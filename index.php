@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=stylesheet href="src/assets/css/inc.css">
     <link rel=stylesheet href="src/assets/css/form.css">
-    <link href="https://cdn.lineicons.com/4.0/lineicons.css" rel="stylesheet">
     <title>Accueil</title>
 </head>
 <body>

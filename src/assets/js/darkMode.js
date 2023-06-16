@@ -21,6 +21,18 @@ const enableDarkMode = () => {
         .footer {
             background-color: #444;
         }
+
+        form {
+            background-color: #444;
+        }
+        
+        .inp-form {
+            background-color: #eee;
+        }
+
+        .container {
+            background-color: #444;
+        }
     `;
 };
 
