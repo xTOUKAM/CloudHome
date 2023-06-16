@@ -13,13 +13,13 @@
         ?>
         <div class="container">
             <div class="form-container sign-in-container">
-                <form method="POST" action="">
+                <form method="POST" action="/website/src/sql/post_inscription.php">
                     <h1>Créer un compte</h1>
-                    <input class="inp-form" type="text" placeholder="Prénom" />
-                    <input class="inp-form" type="email" placeholder="Nom" />
-                    <input class="inp-form" type="email" placeholder="Adresse mail" />
-                    <input class="inp-form" type="password" placeholder="Mot de passe" />
-                    <button class="btn-form">Créer un compte</button>
+                    <input class="inp-form" type="text" id="prenom" placeholder="Prénom" />
+                    <input class="inp-form" type="text" id="nom" placeholder="Nom" />
+                    <input class="inp-form" type="email" id="email" placeholder="Adresse mail" />
+                    <input class="inp-form" type="password" id="password" placeholder="Mot de passe" />
+                    <button type="submit" class="btn-form">Créer un compte</button>
                 </form>
             </div>
         </div>
