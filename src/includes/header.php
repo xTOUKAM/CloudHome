@@ -10,11 +10,11 @@
         <!-- Création de la barre de navigation -->
         <div>
             <ul class="tab">
-                <li><a href="/website/"><i class="lni lni-home"></i></a></li>
-                <li><a href="#"><i class="lni lni-laptop"></i></i></a></li>
-                <li><a href="/website/src/user/createAccount.php"><i class="lni lni-user"></i></a></li>
-                <li><a href="#"><i class="lni lni-support"></i></a></li>
-                <li><a href="#"><i class="lni lni-hand"></i></a></li>
+                <li><a class="a-header-footer" href="/website/"><i class="lni lni-home"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-laptop"></i></i></a></li>
+                <li><a class="a-header-footer" href="/website/src/user/login.php"><i class="lni lni-user"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-support"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-hand"></i></a></li>
             </ul>
         </div>
         <!-- Insertion des scripts -->

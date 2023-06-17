@@ -63,7 +63,7 @@ li {
     margin: auto;
 }
 
-a {
+.a-header-footer {
     text-decoration: none;
     position: relative;
     font-size: 24px;
@@ -93,12 +93,12 @@ li::before {
     transition: transform 0.3s ease-out, background 0.2s ease-out;
 }
 
-li.active a {
+li.active .a-header-footer {
     transform: translateY(-40px);
     position: relative;
 }
 
-a:hover {
+.a-header-footer:hover {
     color: #FFF;
     transform: scale(1.1);
     border-radius: 100%;
@@ -165,9 +165,9 @@ form {
     overflow: hidden;
     margin: auto;
     margin-top: 200px;
-    width: 400px;
+    width: 420px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 420px;
     display: flex;
     justify-content: center;
     align-items: center; /* Nouvelles propriétés pour centrer le contenu */
@@ -201,6 +201,28 @@ form {
 }
 
 .btn-form:focus {
+	outline: none;
+}
+
+.a-form {
+    margin-top: 20px;
+	border-radius: 20px;
+	border: 1px solid #ff6a50;
+	background-color: #ff6a50;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	transition: transform 80ms ease-in;
+}
+
+.a-form:active {
+	transform: scale(0.95);
+}
+
+.a-form:focus {
 	outline: none;
 }
 
