@@ -14,10 +14,10 @@
     <?php
         require_once('src/includes/header.php');
     ?>
-    <div class="container">
+    <div class="info-first">
         <?php 
             if(isset($_SESSION['com_mail'])) {
-                echo("<h2>Bonjour " . $_SESSION['com_nom'] . "</h2>");
+                echo("<h2>Bonjour " . $_SESSION['com_prenom'] . "</h2>");
             } else {
                 echo("<h2>Bonjour visiteur</h2>");
             }

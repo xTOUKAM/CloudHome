@@ -10,11 +10,11 @@
         <!-- Création du footer -->
         <div>
             <ul class="footer">
-                <li><a href="#"><i class="lni lni-facebook-fill"></i></a></li>
-                <li><a href="#"><i class="lni lni-twitter-fill"></i></i></a></li>
-                <li><a href="#"><i class="lni lni-youtube"></i></a></li>
-                <li><a href="#"><i class="lni lni-linkedin-original"></i></a></li>
-                <li><a href="#"><i class="lni lni-github-original"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-facebook-fill"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-twitter-fill"></i></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-youtube"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-linkedin-original"></i></a></li>
+                <li><a class="a-header-footer" href="#"><i class="lni lni-github-original"></i></a></li>
                 <li><a id="dark-mode-toggle" href="#darkMode"><i class="lni lni-sun"></i></a></li>
             </ul>
         </div>

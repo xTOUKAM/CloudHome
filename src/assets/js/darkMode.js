@@ -33,6 +33,10 @@ const enableDarkMode = () => {
         .container {
             background-color: #444;
         }
+
+        .info-first {
+            background-color: #444;
+        }
     `;
 };
 
