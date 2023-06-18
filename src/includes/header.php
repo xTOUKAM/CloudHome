@@ -11,7 +11,7 @@
         <div>
             <ul class="tab">
                 <li><a class="a-header-footer" href="/website/"><i class="lni lni-home"></i></a></li>
-                <li><a class="a-header-footer" href="#"><i class="lni lni-laptop"></i></i></a></li>
+                <li><a class="a-header-footer" href="/website/src/admin/"><i class="lni lni-laptop"></i></i></a></li>
                 <li><a class="a-header-footer" href="/website/src/user/login.php"><i class="lni lni-user"></i></a></li>
                 <li><a class="a-header-footer" href="#"><i class="lni lni-support"></i></a></li>
                 <li><a class="a-header-footer" href="#"><i class="lni lni-hand"></i></a></li>
