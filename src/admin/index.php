@@ -32,6 +32,7 @@
             <h1>Panel Administrateur</h1>
             <p>Bonjour <?= $resultat['com_prenom'] ?> <?= $resultat['com_nom'] ?></p>
             <p>Vous êtes connecté en tant qu'administrateur</p>
+            <a class="btn-form" href="/website/src/admin/voirCompte.php">Voir les comptes</a>
             <a class="btn-form" href="/website/src/user/destroySession.php">Déconnexion</a>
         </div>
     </body>
