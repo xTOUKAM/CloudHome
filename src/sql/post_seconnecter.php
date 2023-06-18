@@ -23,10 +23,10 @@
         $stmt->execute();
 
         if($stmt->rowCount() == 0) {
-            echo("<div class='erreur'>");
+            echo("<div class='container'>");
             echo("<p>Erreur de connexion</p>");
             echo("<br>");
-            echo("<a href='seConnecter.php'>Retour à la page de connexion</a>");
+            echo("<a href='/website/src/user/login.php'>Retour à la page de connexion</a>");
             echo("</div>");
         }
 
@@ -37,6 +37,7 @@
             session_start();
 
             // On enregistre les paramètres de notre visiteur comme variables de session
+            $_SESSION['com_admin'] = $ligne["com_admin"];
             $_SESSION['com_mail'] = $ligne["com_mail"];
             $_SESSION['com_mdp'] = $ligne["com_mdp"];
             $_SESSION['com_nom'] = $ligne["com_nom"];

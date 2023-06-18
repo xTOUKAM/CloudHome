@@ -1,3 +1,7 @@
+<?php
+    $com_admin = isset($_SESSION['com_admin']);
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -11,7 +15,11 @@
         <div>
             <ul class="tab">
                 <li><a class="a-header-footer" href="/website/"><i class="lni lni-home"></i></a></li>
-                <li><a class="a-header-footer" href="/website/src/admin/"><i class="lni lni-laptop"></i></i></a></li>
+                <?php 
+                    if($com_admin == 1 && $_SESSION['com_admin'] == 1){
+                        echo '<li><a class="a-header-footer" href="/website/src/admin/"><i class="lni lni-laptop"></i></i></a></li>';
+                    }
+                ?>
                 <li><a class="a-header-footer" href="/website/src/user/login.php"><i class="lni lni-user"></i></a></li>
                 <li><a class="a-header-footer" href="#"><i class="lni lni-support"></i></a></li>
                 <li><a class="a-header-footer" href="#"><i class="lni lni-hand"></i></a></li>
