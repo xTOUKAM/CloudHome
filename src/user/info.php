@@ -60,6 +60,8 @@
                     <p><strong>Mail :</strong> <?php echo $email; ?></p>
                     <p><strong>Type d'utilisateur :</strong> <?php echo $com_admin; ?></p>
                     <button class="btn-form" type="button"><a href="./modifAccount.php?mail=<?php echo $email ?>">Modifier les informations du compte</a></button>
+                    <!-- Bouton pour détruire la session -->
+                    <button class="btn-form" type="button"><a href="./destroySession.php">Se déconnecter</a></button>
                 </div>
                 <footer>
                     <?php

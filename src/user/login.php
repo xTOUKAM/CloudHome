@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -10,6 +14,12 @@
     <body>
         <?php
             require("../includes/header.php");
+        ?>
+        <!-- On vérifie si l'utilisateur est connecté -->
+        <?php
+            if(isset($_SESSION["com_mail"])) {
+                header("Location: /website/src/user/info.php");
+            }
         ?>
         <div class="container">
             <div class="form-container sign-in-container">
