@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once("../config/bdd.php");
         
     if (isset($_GET["mail"]) && !empty($_GET["mail"])) {
@@ -66,9 +67,13 @@
         $requete = "UPDATE compte SET com_nom = '$nom', com_prenom = '$prenom', com_mail = '$mail', com_mdp = '$password' WHERE com_mail = '$mail'";
         $bdd->exec($requete);
     }
+
+    if (isset($_SESSION['com_mail']) && $_SESSION['com_mail'] != $mail) {
+        header("Location: ../user/login.php");
+    }
 ?>
 
-<?php if (isset($mail)) : ?>
+<?php if (isset($mail) == $_SESSION['com_mail']) : ?>
     <!DOCTYPE html>
     <html lang="fr">
     <head>
@@ -87,6 +92,23 @@
                     <input class="inp-form" type="text" id="com_nom" name="com_nom" placeholder="Nom" value="<?php echo $nom; ?>" />
                     <input class="inp-form" type="password" id="com_mdp" name="com_mdp" placeholder="Mot de passe"/>
                     <input class="inp-form" type="password" id="com_mdp2" name="com_mdp2" placeholder="Confirmation du mot de passe"/>
+                    <?php 
+                        if (isset($prenom_message)) {
+                            echo "<p class='error-message'>$prenom_message</p>";
+                        }
+                        if (isset($nom_message)) {
+                            echo "<p class='error-message'>$nom_message</p>";
+                        }
+                        if (isset($mail_message)) {
+                            echo "<p class='error-message'>$mail_message</p>";
+                        }
+                        if (isset($motDePasse_message)) {
+                            echo "<p class='error-message'>$motDePasse_message</p>";
+                        }
+                        if (isset($motDePasseVerif_message)) {
+                            echo "<p class='error-message'>$motDePasseVerif_message</p>";
+                        }
+                    ?>
                     <button type="submit" class="btn-form">Modifier</button>
                 </form>
             </div>
