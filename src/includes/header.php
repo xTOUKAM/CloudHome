@@ -1,5 +1,6 @@
 <?php
     $com_admin = isset($_SESSION['com_admin']);
+    $com_mail = isset($_SESSION['com_mail']);
 ?>
 
 <!DOCTYPE html>
@@ -21,8 +22,12 @@
                     }
                 ?>
                 <li><a class="a-header-footer" href="/website/src/user/login.php"><i class="lni lni-user"></i></a></li>
-                <li><a class="a-header-footer" href="#"><i class="lni lni-support"></i></a></li>
-                <li><a class="a-header-footer" href="#"><i class="lni lni-hand"></i></a></li>
+                <?php 
+                    if($com_mail != ""){
+                        echo '<li><a class="a-header-footer" href="#"><i class="lni lni-image"></i></a></li>';
+                    }
+                ?>
+                <li><a class="a-header-footer" href="/website/src/others/mail.php"><i class="lni lni-hand"></i></a></li>
             </ul>
         </div>
         <!-- Insertion des scripts -->
