@@ -1,4 +1,7 @@
 <?php
+    session_start();
+
+    $prenom = isset($_SESSION['com_prenom']) ? $_SESSION['com_prenom'] : "visiteur";
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
@@ -8,7 +11,7 @@
 
     if (isset($_POST['submit'])) {
         $to = "houllegatte.tom@gmail.com";
-        $subject = "Mail de " . $_POST['email'] . " depuis le cloudHome";
+        $subject = "Mail de " . $prenom . " | CloudHome";
         $message = $_POST['message'];
 
         $mail = new PHPMailer(true);
@@ -20,7 +23,7 @@
             $mail->SMTPSecure = 'tls';
             $mail->SMTPAuth = true;
             $mail->Username = 'votre adresse mail';
-            $mail->Password = 'votre clé de sécurité';
+            $mail->Password = 'votre clé d\'application';
 
             $mail->setFrom($_POST['email']);
             $mail->addAddress($to);
@@ -28,9 +31,9 @@
             $mail->Body = $message;
 
             $mail->send();
-            echo "Mail envoyé";
+            $message = "Mail envoyé";
         } catch (Exception $e) {
-            echo "Erreur lors de l'envoi du mail : " . $mail->ErrorInfo;
+            $message = "Erreur lors de l'envoi du mail : " . $mail->ErrorInfo;
         }
     }
 ?>
@@ -54,6 +57,7 @@
                     <input class="inp-form" type="email" id="email" name="email" placeholder="Adresse mail" required />
                     <textarea class="inp-form" id="message" name="message" placeholder="Message" required></textarea>
                     <input type="submit" name="submit" value="Envoyer" class="btn-form">
+                    <p><?php $message ?></p>
                 </form>
             </div>
         </div>
