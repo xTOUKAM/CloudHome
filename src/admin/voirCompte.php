@@ -1,78 +1,80 @@
 <?php
-    // Connexion à la base de données
-    require_once("../config/bdd.php");
+// Connexion à la base de données
+require_once("../config/bdd.php");
 
-    // On vérifie que le compte est un administrateur
-    require_once("../sql/verifAdmin.php");
+// On vérifie que le compte est un administrateur
+require_once("../sql/verifAdmin.php");
 
-    // préparation de la requête
-    $sql = "SELECT * FROM compte";
+// Pagination - Nombre de comptes par page
+$comptesParPage = 2;
 
+// Page actuelle
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$offset = ($page - 1) * $comptesParPage;
+
+// Requête pour récupérer le nombre total de comptes
+$countReq = $bdd->prepare("SELECT COUNT(*) AS total FROM compte");
+$countReq->execute();
+$totalComptes = $countReq->fetch(PDO::FETCH_ASSOC)['total'];
+
+// Calcul du nombre total de pages
+$totalPages = ceil($totalComptes / $comptesParPage);
+
+// Requête pour récupérer les comptes avec une limite et un offset
+if (isset($_POST['search']) && !empty($_POST['search'])) {
+    $search = $_POST['search'];
+    $sql = "SELECT * FROM compte WHERE com_mail LIKE '%$search%' OR com_nom LIKE '%$search%' OR com_prenom LIKE '%$search%' OR com_actif LIKE '%$search%'";
     $requete = $bdd->prepare($sql);
-
-    // Exécution de la requête
     $requete->execute();
-    $resultat = $requete->fetchAll();    
+    $resultat = $requete->fetchAll();
+    // Masquer les numéros de page
+    $totalPages = 0;
+} else {
+    $sql = "SELECT * FROM compte LIMIT :offset, :comptesParPage";
+    $requete = $bdd->prepare($sql);
+    $requete->bindParam(':offset', $offset, PDO::PARAM_INT);
+    $requete->bindParam(':comptesParPage', $comptesParPage, PDO::PARAM_INT);
+    $requete->execute();
+    $resultat = $requete->fetchAll();
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel=stylesheet href="../assets/css/inc.css">
+    <link rel="stylesheet" href="../assets/css/inc.css">
     <style>
+        /* Styles CSS pour la pagination */
         .info-first {
-            max-height: 750px;
-            margin-top: 9%;
-            overflow-y : scroll;
+            margin-top: 10%;
         }
 
-        /* Pour les navigateurs Webkit (Chrome, Safari) */
-        .info-first::-webkit-scrollbar {
-        width: 8px;
+        .pagination {
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .info-first::-webkit-scrollbar-track {
-        background-color: #f1f1f1;
+        .pagination a {
+            margin: 0 5px;
+            padding: 5px 10px;
+            background-color: #f1f1f1;
+            text-decoration: none;
+            color: #333;
         }
 
-        .info-first::-webkit-scrollbar-thumb {
-        background-color: #888;
-        border-radius: 4px;
-        }
-
-        /* Pour les navigateurs Firefox */
-        .info-first {
-        scrollbar-width: thin;
-        scrollbar-color: #888 #f1f1f1;
-        }
-
-        /* Pour les navigateurs autres que Chrome, Safari et Firefox */
-        .info-first {
-        scrollbar-width: thin;
-        scrollbar-color: #888 #f1f1f1;
-        }
-
-        /* Style supplémentaire pour rendre la scrollbar plus discrète */
-        .info-first::-webkit-scrollbar-thumb {
-        background-color: #bbb;
-        }
-
-        .info-first::-webkit-scrollbar-thumb:hover {
-        background-color: #999;
-        }
-
-        .info-first::-webkit-scrollbar-track {
-        background-color: #f9f9f9;
-        }
-
-        .info-first::-webkit-scrollbar-track:hover {
-        background-color: #f1f1f1;
+        .pagination a.current {
+            background-color: #333;
+            color: #fff;
         }
     </style>
     <title>Compte utilisateur</title>
 </head>
+
 <body>
     <?php include('../includes/header.php'); ?>
     <!-- On affiche les comptes -->
@@ -83,42 +85,46 @@
             <input class="inp-form" type="submit" value="Rechercher">
             <br />
         </form>
-        <?php 
-            if(isset($_POST['search'])) {
-                $search = $_POST['search'];
-                $sql = "SELECT * FROM compte WHERE com_mail LIKE '%$search%' OR com_nom LIKE '%$search%' OR com_prenom LIKE '%$search%' OR com_actif LIKE '%$search%'";
-                $requete = $bdd->prepare($sql);
-                $requete->execute();
-                $resultat = $requete->fetchAll();
-            }
-        ?>
         <?php
-            foreach ($resultat as $compte) { ?>
+        foreach ($resultat as $compte) { ?>
             <p><strong>Mail : </strong><?= $compte['com_mail'] ?></p>
             <p><strong>Nom : </strong><?= $compte['com_nom'] ?></p>
             <p><strong>Prénom : </strong><?= $compte['com_prenom'] ?></p>
-            
+
             <?php
-            if($compte['com_actif'] == 0) {
+            if ($compte['com_actif'] == 0) {
                 $etat = "Actif";
             } else {
                 $etat = "Inactif";
             }
             ?>
-            <p><strong>état du compte : </strong><?= $etat ?></p>
+            <p><strong>État du compte : </strong><?= $etat ?></p>
 
-            <?php 
-            if($compte['com_actif'] == 0) { ?>
-                <a class="btn-form desactivate"href="/website/src/sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Désactiver le compte</a>
+            <?php
+            if ($compte['com_actif'] == 0) { ?>
+                <a class="btn-form desactivate" href="/website/src/sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Désactiver le compte</a>
             <?php } else { ?>
-                <a class="btn-form activate"href="/website/src/sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Activer le compte</a>
+                <a class="btn-form activate" href="/website/src/sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Activer le compte</a>
             <?php } ?>
             <br/>
         <?php } ?>
+
+        <!-- Pagination -->
+        <?php if ($totalPages > 0 && empty($_POST['search'])) : ?>
+            <div class="pagination">
+                <?php
+                for ($i = 1; $i <= $totalPages; $i++) {
+                    $active = ($i == $page) ? 'current' : '';
+                    echo "<a href='voirCompte.php?page=$i' class='$active'>$i</a>";
+                }
+                ?>
+            </div>
+        <?php endif; ?>
     </div>
 
     <footer>
         <?php include('../includes/footer.php'); ?>
     </footer>
 </body>
+
 </html>
