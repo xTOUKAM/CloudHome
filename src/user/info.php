@@ -34,9 +34,9 @@
 
         // On vérifie si l'utilisateur est un administrateur
         if($com_admin == 1) {
-            $com_admin = "Vous êtes un administrateur";
+            $com_admin_message = "Administrateur";
         } else {
-            $com_admin = "Vous êtes un utilisateur";
+            $com_admin_message = "Utilisateur";
         }
         ?>
 
@@ -58,7 +58,7 @@
                     <p><strong>Nom :</strong> <?php echo $nom; ?></p>
                     <p><strong>Prénom :</strong> <?php echo $prenom; ?></p>
                     <p><strong>Mail :</strong> <?php echo $email; ?></p>
-                    <p><strong>Type d'utilisateur :</strong> <?php echo $com_admin; ?></p>
+                    <p><strong>Type d'utilisateur :</strong> <?php echo $com_admin_message; ?></p>
                     <button class="btn-form" type="button"><a href="./modifAccount.php?mail=<?php echo $email ?>">Modifier les informations du compte</a></button>
                     <!-- Bouton pour détruire la session -->
                     <button class="btn-form" type="button"><a href="./destroySession.php">Se déconnecter</a></button>
