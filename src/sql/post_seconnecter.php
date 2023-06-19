@@ -22,14 +22,6 @@
         $stmt->bindValue(':mdp', $mdp);
         $stmt->execute();
 
-        if($stmt->rowCount() == 0) {
-            echo("<div class='container'>");
-            echo("<p>Erreur de connexion</p>");
-            echo("<br>");
-            echo("<a href='/website/src/user/login.php'>Retour à la page de connexion</a>");
-            echo("</div>");
-        }
-
         foreach($stmt as $ligne) {
             echo($ligne["com_mail"]);
 
@@ -53,3 +45,36 @@
     verifCompte($com_mail, $mdp, $bdd);
 
 ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel=stylesheet href="../assets/css/inc.css">
+    <title>Erreur de connexion !</title>
+</head>
+<body>
+    <!-- Header -->
+    <?php
+        require("../includes/header.php");
+    ?>
+
+    <?php
+        if($stmt->rowCount() == 0) {
+            echo("<div class='info-first' style='align-items: center'>");
+            echo("<h1 style='color: red'>Erreur de connexion</h1>");
+            echo("<br>");
+            echo("<a class=\"btn-form\" href='/website/src/user/login.php'>Retour à la page de connexion</a>");
+            echo("</div>");
+        }
+    ?>
+    
+    <!-- Footer -->
+    <footer>
+        <?php
+            require("../includes/footer.php");
+        ?>
+    </footer>
+</body>
+</html>
