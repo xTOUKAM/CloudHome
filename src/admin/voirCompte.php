@@ -49,7 +49,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
     <style>
         /* Styles CSS pour la pagination */
         .info-first {
-            margin-top: 10%;
+            margin-top: 6%;
         }
 
         .pagination {
@@ -72,7 +72,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
             color: #fff;
         }
     </style>
-    <title>Compte utilisateur</title>
+    <title>Compte utilisateur | Administration</title>
 </head>
 
 <body>

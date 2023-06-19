@@ -38,8 +38,7 @@
 
             // On redirige notre visiteur vers une page de notre section membre
             header('Location: /website/index.php');
-        }
-        
+        }    
     }
 
     verifCompte($com_mail, $mdp, $bdd);
@@ -65,6 +64,12 @@
             echo("<div class='info-first' style='align-items: center'>");
             echo("<h1 style='color: red'>Erreur de connexion</h1>");
             echo("<br>");
+            if($com_mail == "" || $mdp == "") {
+                echo("<p >Veuillez remplir tous les champs</p>");
+            } else {
+                echo("<p>Identifiant ou mot de passe incorrect</p>");
+            }
+
             echo("<a class=\"btn-form\" href='/website/src/user/login.php'>Retour à la page de connexion</a>");
             echo("</div>");
         }
