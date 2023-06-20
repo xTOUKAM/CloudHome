@@ -50,11 +50,17 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
         /* Styles CSS pour la pagination */
         .info-first {
             margin-top: 6%;
+            display: inline-block;
+        }
+
+        .info-first .btn-form {
+            display: inline-block;
+            margin-top: 5px;
+            margin-bottom: 10px;
         }
 
         .pagination {
             margin-top: 10px;
-            display: flex;
             justify-content: center;
             align-items: center;
         }
@@ -109,7 +115,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
             ?>
             
             <p><strong>Administrateur : </strong><?= $admin ?></p>
-            
+            <a class="btn-form" href="../admin/modifUser.php?com_mail=<?php echo $compte["com_mail"] ?>">Modifier le compte</a>
             <?php
             if ($compte['com_actif'] == 0) { 
                 if($_SESSION['com_mail'] == $compte['com_mail']) {
@@ -120,7 +126,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
             <?php } else { ?>
                 <a class="btn-form activate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Activer le compte</a>
             <?php } ?>
-            <br/>
+            <br />
         <?php } ?>
 
         <!-- Pagination -->
