@@ -1,4 +1,4 @@
-# CloudHome - A Cloud Storage Service for your Home
+# <img src="https://image.noelshack.com/fichiers/2023/25/2/1687261539-cloudhome.png" height="300" />
 <p float="left">
     <img src="https://img.shields.io/static/v1?label=License&message=MIT&color=blue">
     <img src="https://img.shields.io/static/v1?label=Version&message=1.7.2&color=blue">
