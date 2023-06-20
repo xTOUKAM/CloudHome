@@ -44,16 +44,6 @@ CloudHome is written in PhP and uses MySQL as its database. It can be installed 
 5. Open the `index.php` file in your web browser
 6. It's done! Create your account and start using CloudHome
 
-## Screenshots
-
-![CloudHome](https://raw.githubusercontent.com/xTOUKAM/CloudHome/master/screenshots/1.png)
-
-
-![CloudHome](https://raw.githubusercontent.com/xTOUKAM/CloudHome/master/screenshots/2.png)
-
-
-
-
 ## License
 
 All the code in this repository do not have a license. You can use it for free. If you want to contribute to this project. Send me an email at [My Email](mailto:houllegatte.tom@gmail.com).
