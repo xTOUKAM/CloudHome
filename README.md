@@ -50,7 +50,7 @@ CloudHome is written in PhP and uses MySQL as its database. It can be installed 
 
 ## License
 
-All the code in this repository do not have a license. You can use it for free. If you want to contribute to this project. Send me an email at [My Email](mailto:houllegatte.tom@gmail.com).
+CloudHome is licensed under the [MIT License](./LICENSE).
 
 ## Contact
 
