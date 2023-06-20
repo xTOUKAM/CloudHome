@@ -71,4 +71,8 @@ If you like this project, consider making a donation. Your donation will be used
 
 * [Tom Houllegatte](https://github.com/xTOUKAM)
 
+## Contributors
+
+* [Enzo Djabali](https://github.com/enzodjabali)
+
 
