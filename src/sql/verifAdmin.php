@@ -15,6 +15,6 @@
 
     // On vérifie que l'utilisateur est bien un administrateur
     if($resultat['com_admin'] == 0){
-        header('Location: /website/');
+        header('Location: /');
     }
 ?>

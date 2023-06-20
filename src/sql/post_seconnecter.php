@@ -1,4 +1,6 @@
 <?php
+    session_start();
+
     // On inclut le fichier de connexion à la base de données
     require_once("../config/bdd.php");
 
@@ -6,8 +8,8 @@
     require_once("./verifEtat.php");
 
     // Récupération des données du formulaire
-    $com_mail = $_POST["email"];
-    $mdp = $_POST["password"];
+    $com_mail = $_POST["email"] ?? "";
+    $mdp = $_POST["password"] ?? "";
 
     // Déclaration de la variable $stmt en dehors de la fonction
     $stmt = null;
@@ -28,10 +30,6 @@
             if ($stmt->rowCount() > 0) {
                 // Utilisateur trouvé, enregistrement des données de session
                 foreach($stmt as $ligne) {
-                    echo($ligne["com_mail"]);
-
-                    // On démarre la session
-                    session_start();
 
                     // On enregistre les paramètres de notre visiteur comme variables de session
                     $_SESSION['com_admin'] = $ligne["com_admin"];
@@ -42,7 +40,7 @@
                     $_SESSION['com_id'] = $ligne["com_id"];
 
                     // On redirige notre visiteur vers une page de notre section membre
-                    header('Location: /website/index.php');
+                    header('Location: /');
                     exit(); // Terminer le script après la redirection
                 }
             } else {
@@ -55,7 +53,7 @@
                 } else {
                     echo("<p>Identifiant ou mot de passe incorrect</p>");
                 }
-                echo("<a class=\"btn-form\" href='/website/src/user/login.php'>Retour à la page de connexion</a>");
+                echo("<a class=\"btn-form\" href='../user/login.php'>Retour à la page de connexion</a>");
                 echo("</div>");
             }
         } else {

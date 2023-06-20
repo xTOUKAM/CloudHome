@@ -13,7 +13,7 @@
         ?>
         <div class="container">
             <div class="form-container sign-in-container">
-                <form method="POST" action="/website/src/sql/post_inscription.php">
+                <form method="POST" action="../sql/post_inscription.php">
                     <h1>Créer un compte</h1>
                     <input class="inp-form" type="text" id="prenom" name="prenom" placeholder="Prénom" />
                     <input class="inp-form" type="text" id="nom" name="nom" placeholder="Nom" />

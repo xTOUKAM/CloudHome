@@ -1,6 +1,6 @@
 <?php
-$com_admin = isset($_SESSION['com_admin']);
-$com_mail = isset($_SESSION['com_mail']);
+    $com_admin = isset($_SESSION['com_admin']) ? (int)$_SESSION['com_admin'] : 0;
+    $com_mail = isset($_SESSION['com_mail']);
 ?>
 
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ $com_mail = isset($_SESSION['com_mail']);
             <ul class="tab">
                 <li><a class="a-header-footer" href="<?php echo getRelativePath('../../index.php'); ?>"><i class="lni lni-home"></i></a></li>
                 <?php
-                if ($com_admin == 1 && $_SESSION['com_admin'] == 1) {
+                if ($com_admin === 1) {
                     echo '<li><a class="a-header-footer" href="' . getRelativePath('../admin/') . '"><i class="lni lni-laptop"></i></a></li>';
                 }
                 ?>

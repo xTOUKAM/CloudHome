@@ -115,10 +115,10 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
                 if($_SESSION['com_mail'] == $compte['com_mail']) {
                     // On affiche pas le bouton si c'est le compte de l'admin connecté
                 } else { ?>
-                    <a class="btn-form desactivate" href="/website/src/sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Désactiver le compte</a>
+                    <a class="btn-form desactivate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Désactiver le compte</a>
                 <?php } ?>
             <?php } else { ?>
-                <a class="btn-form activate" href="/website/src/sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Activer le compte</a>
+                <a class="btn-form activate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Activer le compte</a>
             <?php } ?>
             <br/>
         <?php } ?>

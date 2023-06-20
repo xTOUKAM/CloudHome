@@ -1,9 +1,9 @@
 <?php
     // Les différentes variables de connexion à la base de données PhPMyAdmin
-    $host = "localhost";
+    $host = "database";
     $dbname = "panel";
     $username = "root";
-    $password = "";
+    $password = "dev";
 
     // Connexion à la base de données
     try {

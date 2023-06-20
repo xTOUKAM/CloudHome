@@ -90,7 +90,7 @@
         $_SESSION["email"] = $email;
 
         // On redirige l'utilisateur vers la page de connexion
-        header("Location: /website/src/user/login.php");
+        header("Location: ../user/login.php");
         
     } else {
         echo "Les variables ne sont pas renseignées !";

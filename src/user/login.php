@@ -1,5 +1,12 @@
 <?php
     session_start();
+
+    // On vérifie si l'utilisateur est connecté
+    $comMail = isset($_SESSION["com_mail"]) ? (string)$_SESSION["com_mail"] : "";
+
+    if(!empty($comMail)) {
+        header("Location: ../user/info.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -15,20 +22,14 @@
         <?php
             require("../includes/header.php");
         ?>
-        <!-- On vérifie si l'utilisateur est connecté -->
-        <?php
-            if(isset($_SESSION["com_mail"])) {
-                header("Location: /website/src/user/info.php");
-            }
-        ?>
         <div class="container">
             <div class="form-container sign-in-container">
-                <form method="POST" action="/website/src/sql/post_seconnecter.php">
+                <form method="POST" action="../sql/post_seconnecter.php">
                     <h1>Se connecter</h1>
                     <input class="inp-form" type="email" id="email" name="email" placeholder="Adresse mail" />
                     <input class="inp-form" type="password" id="password" name="password" placeholder="Mot de passe" />
                     <button type="submit" class="btn-form">Se connecter</button>
-                    <a class="a-form" href="/website/src/user/register.php">Pas encore inscrit ?</a>
+                    <a class="a-form" href="../user/register.php">Pas encore inscrit ?</a>
                 </form>
             </div>
         </div>
