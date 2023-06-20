@@ -31,7 +31,7 @@ $com_mail = isset($_SESSION['com_mail']);
             </ul>
         </div>
         <!-- Insertion des scripts -->
-        <script src="../assets/js/header.js"></script>
+        <script src="../assets/js/inc.js"></script>
 
         <?php
         // Fonction pour obtenir le chemin relatif en fonction de l'URI actuelle

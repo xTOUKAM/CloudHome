@@ -20,7 +20,7 @@
         <!-- Fin du footer -->
 
         <!-- Insertion des scripts -->
-        <script src="../assets/js/footer.js"></script>
+        <script src="../assets/js/inc.js"></script>
         <script src="../assets/js/darkMode.js"></script>
     </body>
 </html>

@@ -81,7 +81,7 @@
             "prenom" => $prenom,
             "nom" => $nom,
             "email" => $email,
-            "password" => $password,
+            "password" => sha1($password),
             "admin" => $admin
         ));
 

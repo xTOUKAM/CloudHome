@@ -21,7 +21,7 @@
         // Préparation de la requête
         $stmt = $bdd->prepare($sql);
         $stmt->bindValue(':com_mail', $com_mail);
-        $stmt->bindValue(':mdp', $mdp);
+        $stmt->bindValue(':mdp', sha1($mdp));
         $stmt->execute();
 
         if ($stmt !== false) { // Vérifie si la requête s'est exécutée avec succès
