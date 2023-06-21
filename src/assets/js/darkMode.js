@@ -4,7 +4,7 @@ const darkModeToggle = document.getElementById('dark-mode-toggle');
 const darkModeStyle = document.getElementById('dark-mode-style');
 
 // Vérifie si le mode sombre est actif ou non
-const isDarkModeActive = () => darkModeStyle.innerHTML.length > 0;
+const isDarkModeActive = () => localStorage.getItem('darkModeActive') === 'true';
 
 // Définit le mode sombre
 const enableDarkMode = () => {
@@ -14,7 +14,7 @@ const enableDarkMode = () => {
             color: #fff;
         }
         
-        .tab{
+        .tab {
             background-color: #444;
         }
         
@@ -25,10 +25,6 @@ const enableDarkMode = () => {
         form {
             background-color: #444;
         }
-        
-        .inp-form {
-            background-color: #eee;
-        }
 
         .container {
             background-color: #444;
@@ -37,12 +33,36 @@ const enableDarkMode = () => {
         .info-first {
             background-color: #444;
         }
+
+        .info-first p {
+            color: #fff;
+        }
+
+        .pagination a.current {
+            background-color: #eee;
+            color: #444;
+        }
+
+        .inp-form {
+            background-color: #A3A3A3;
+            color: #fff;
+        }
+
+        .inp-form::placeholder {
+            color: #fff;
+        }
     `;
+
+    // Stocke l'état du mode sombre dans le localStorage
+    localStorage.setItem('darkModeActive', 'true');
 };
 
 // Désactive le mode sombre
 const disableDarkMode = () => {
     darkModeStyle.innerHTML = '';
+
+    // Stocke l'état du mode sombre dans le localStorage
+    localStorage.setItem('darkModeActive', 'false');
 };
 
 // Bascule entre le mode sombre et le mode normal
@@ -53,6 +73,13 @@ const toggleDarkMode = () => {
         enableDarkMode();
     }
 };
+
+// Vérifie l'état initial du mode sombre lors du chargement de chaque page
+document.addEventListener('DOMContentLoaded', () => {
+    if (isDarkModeActive()) {
+        enableDarkMode();
+    }
+});
 
 // Gère les clics sur le bouton de bascule du mode sombre
 darkModeToggle.addEventListener('click', toggleDarkMode);
