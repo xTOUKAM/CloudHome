@@ -1,5 +1,8 @@
 <?php
     session_start();
+
+    // On inclut le fichier de traduction
+    require_once('config/language.php');
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +11,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel=stylesheet href="assets/css/inc.css">
-    <title>Accueil</title>
+    <title><?php echo getTranslation("Accueil"); ?></title>
 </head>
 <body>
     <?php
@@ -16,11 +19,11 @@
     ?>
     <div class="info-first">
         <?php 
-            if(isset($_SESSION['com_mail'])) {
-                echo("<h2>Bonjour " . $_SESSION['com_prenom'] . "</h2>");
-            } else {
-                echo("<h2>Bonjour visiteur</h2>");
-            }
+            if(isset($_SESSION['com_mail'])) { ?>
+                <h2><?php echo getTranslation("Bonjour") . " " . $_SESSION['com_prenom'] ?></h2>
+            <?php } else { ?>
+                <h2><?php echo getTranslation("Bonjour") . " " . getTranslation("visiteur") ?></h2>
+            <?php }
         ?>
     </div>
     
