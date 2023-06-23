@@ -8,6 +8,7 @@
     // On créé plusieurs variables pour le nom et le prénom
     $nom = $_SESSION['com_nom'];
     $prenom = $_SESSION['com_prenom'];
+    $id = $_SESSION['com_id'];
 
     // On vérifie les types de fichiers autorisés
     $arr_file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
@@ -25,17 +26,17 @@
         }
 
         // On crée un dossier pour le membre s'il n'existe pas
-        if (!is_dir("../uploads/".$nom."-".$prenom)) {
-            mkdir("../uploads/".$nom."-".$prenom, 0777);
-            chmod("../uploads/".$nom."-".$prenom, 0777);
+        if (!is_dir("../uploads/".$nom."-".$prenom."-".$id)) {
+            mkdir("../uploads/".$nom."-".$prenom."-".$id, 0777);
+            chmod("../uploads/".$nom."-".$prenom."-".$id, 0777);
         }
 
         $filename = time().'_'.$_FILES['file']['name'];
 
         // On déplace le ou les fichiers dans le dossier uploads
-        move_uploaded_file($_FILES['file']['tmp_name'], '../uploads/'.$nom."-".$prenom.'/'.$filename);
+        move_uploaded_file($_FILES['file']['tmp_name'], '../uploads/'.$nom."-".$prenom."-".$id.'/'.$filename);
 
-        echo '../uploads/'.$nom."-".$prenom.'/'.$filename;
+        echo '../uploads/'.$nom."-".$prenom."-".$id.'/'.$filename;
         die;
     }
 ?>
