@@ -21,7 +21,7 @@
             } else {
                 echo("<h2>La page demandée est invalide visiteur</h2>");
             }
-            $redirectUrl = "http://$_SERVER[HTTP_HOST]/website/";
+            $redirectUrl = "http://$_SERVER[HTTP_HOST]/";
             echo "<p>Redirection vers la page d'accueil</p>";
 			echo "<button class=\"btn-form\" onclick=\"window.location.href='$redirectUrl'\">Page d'accueil</button>";
         ?>
