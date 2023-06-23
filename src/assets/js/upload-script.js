@@ -43,24 +43,6 @@ dropArea.addEventListener("drop", (event) => {
 
 // Affiche les fichiers sélectionnés
 function showFiles(files) {
-  let messageShown = false; // Indicateur pour vérifier si le message a déjà été affiché
-  for (let i = 0; i < files.length; i++) {
-    const file = files[i];
-    let fileType = file.type;
-    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
-    if (validExtensions.includes(fileType) && !messageShown) {
-      // Afficher une popup pour les fichiers image
-      messageShown = true; // Met à jour l'indicateur pour n'afficher qu'une seule fois
-      showPopup(`Le fichier "${file.name}" est une image.`);
-    } else if (!messageShown) {
-      // Afficher une popup pour les fichiers non-image
-      messageShown = true; // Met à jour l'indicateur pour n'afficher qu'une seule fois
-      showPopup(`Le fichier "${file.name}" n'est pas une image.`);
-    }
-  }
-}
-
-function showFiles(files) {
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     let fileType = file.type;

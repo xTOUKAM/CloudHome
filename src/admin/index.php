@@ -2,6 +2,9 @@
     // Connexion à la base de données
     require('../config/bdd.php');
 
+    // On inclut le fichier de traduction
+    require('../config/language.php');
+
     // On vérifie que l'utilisateur est bien un administrateur
     require('../sql/verifAdmin.php');
 
@@ -23,17 +26,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel=stylesheet href="../assets/css/inc.css">
-        <title>Administrateur | Panel</title>
+        <title><?php echo getTranslation("Administrateur"); ?> | Panel</title>
     </head>
     <body>
         <?php include('../includes/header.php'); ?>
 
         <div class="info-first">
-            <h1>Panel Administrateur</h1>
-            <p>Bonjour <?= $resultat['com_prenom'] ?> <?= $resultat['com_nom'] ?></p>
-            <p>Vous êtes connecté en tant qu'administrateur</p>
-            <a class="btn-form" href="../admin/voirCompte.php">Voir les comptes</a>
-            <a class="btn-form" href="../user/destroySession.php">Déconnexion</a>
+            <h1><?php echo getTranslation("Panel administrateur") ?></h1>
+            <p><?php echo getTranslation("Bonjour") ?> <?= $resultat['com_prenom'] ?> <?= $resultat['com_nom'] ?></p>
+            <p><?php echo getTranslation("Vous êtes connecté en tant qu'administrateur"); ?></p>
+            <a class="btn-form" href="../admin/voirCompte.php"><?php echo getTranslation("Voir les comptes"); ?></a>
+            <a class="btn-form" href="../user/destroySession.php"><?php echo getTranslation("Déconnexion"); ?></a>
         </div>
     </body>
 

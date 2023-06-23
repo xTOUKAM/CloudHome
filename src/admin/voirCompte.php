@@ -2,6 +2,9 @@
 // Connexion à la base de données
 require_once("../config/bdd.php");
 
+// On inclut le fichier de traduction
+require_once("../config/language.php");
+
 // On vérifie que le compte est un administrateur
 require_once("../sql/verifAdmin.php");
 
@@ -78,7 +81,7 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
             color: #fff;
         }
     </style>
-    <title>Compte utilisateur | Administration</title>
+    <title><?php echo getTranslation("Compte utilisateur | Administration"); ?></title>
 </head>
 
 <body>
@@ -86,16 +89,16 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
     <!-- On affiche les comptes -->
     <div class="info-first">
         <form action="" method="post">
-            <h1>Panel Administrateur</h1>
-            <input class="inp-form" type="text" name="search" placeholder="Rechercher un compte">
-            <input class="inp-form" type="submit" value="Rechercher">
+            <h1><?php echo getTranslation("Panel administrateur"); ?></h1>
+            <input class="inp-form" type="text" name="search" placeholder="<?php echo getTranslation("Rechercher un compte"); ?>">
+            <input class="inp-form" type="submit" value="<?php echo getTranslation("Rechercher"); ?>">
             <br />
         </form>
         <?php
         foreach ($resultat as $compte) { ?>
-            <p><strong>Mail : </strong><?= $compte['com_mail'] ?></p>
-            <p><strong>Nom : </strong><?= $compte['com_nom'] ?></p>
-            <p><strong>Prénom : </strong><?= $compte['com_prenom'] ?></p>
+            <p><strong><?php echo getTranslation("Mail"); ?> : </strong><?= $compte['com_mail'] ?></p>
+            <p><strong><?php echo getTranslation("Nom"); ?> : </strong><?= $compte['com_nom'] ?></p>
+            <p><strong><?php echo getTranslation("Prénom"); ?> : </strong><?= $compte['com_prenom'] ?></p>
 
             <?php
             if ($compte['com_actif'] == 0) {
@@ -104,27 +107,27 @@ if (isset($_POST['search']) && !empty($_POST['search'])) {
                 $etat = "Inactif";
             }
             ?>
-            <p><strong>État du compte : </strong><?= $etat ?></p>
+            <p><strong><?php echo getTranslation("État du compte"); ?> : </strong><?= $etat ?></p>
             
             <?php 
             if($compte['com_admin'] == 1) {
-                $admin = "Oui";
+                $admin = getTranslation("Oui");
             } else {
-                $admin = "Non";
+                $admin = getTranslation("Non");
             } 
             ?>
             
-            <p><strong>Administrateur : </strong><?= $admin ?></p>
-            <a class="btn-form" href="../admin/modifUser.php?com_mail=<?php echo $compte["com_mail"] ?>">Modifier le compte</a>
+            <p><strong><?php echo getTranslation("Administrateur"); ?> : </strong><?= $admin ?></p>
+            <a class="btn-form" href="../admin/modifUser.php?com_mail=<?php echo $compte["com_mail"] ?>"><?php echo getTranslation("Modifier le compte"); ?></a>
             <?php
             if ($compte['com_actif'] == 0) { 
                 if($_SESSION['com_mail'] == $compte['com_mail']) {
                     // On affiche pas le bouton si c'est le compte de l'admin connecté
                 } else { ?>
-                    <a class="btn-form desactivate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Désactiver le compte</a>
+                    <a class="btn-form desactivate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>"><?php echo getTranslation("Désactiver le compte"); ?></a>
                 <?php } ?>
             <?php } else { ?>
-                <a class="btn-form activate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>">Activer le compte</a>
+                <a class="btn-form activate" href="../sql/changeEtat.php?mail=<?= $compte['com_mail'] ?>"><?php echo getTranslation("Activer le compte"); ?></a>
             <?php } ?>
             <br />
         <?php } ?>

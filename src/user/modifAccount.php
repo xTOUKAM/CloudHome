@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+    require("../config/language.php");
     require_once("../config/bdd.php");
         
     if (isset($_GET["mail"]) && !empty($_GET["mail"])) {
@@ -80,18 +82,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../assets/css/inc.css">
-        <title>Modifier compte</title>
+        <title><?php echo getTranslation("Modifier compte") ?></title>
     </head>
     <body>
         <?php require("../includes/header.php"); ?>
         <div class="container">
             <div class="form-container sign-in-container">
                 <form method="POST" action="">
-                    <h1>Modifier mon compte</h1>
-                    <input class="inp-form" type="text" id="com_prenom" name="com_prenom" placeholder="Prénom" value="<?php echo $prenom; ?>" />
-                    <input class="inp-form" type="text" id="com_nom" name="com_nom" placeholder="Nom" value="<?php echo $nom; ?>" />
-                    <input class="inp-form" type="password" id="com_mdp" name="com_mdp" placeholder="Mot de passe"/>
-                    <input class="inp-form" type="password" id="com_mdp2" name="com_mdp2" placeholder="Confirmation du mot de passe"/>
+                    <h1><?php echo getTranslation("Modifier mon compte") ?></h1>
+                    <input class="inp-form" type="text" id="com_prenom" name="com_prenom" placeholder="<?php echo getTranslation("Prénom") ?>" value="<?php echo $prenom; ?>" />
+                    <input class="inp-form" type="text" id="com_nom" name="com_nom" placeholder="<?php echo getTranslation("Nom") ?>" value="<?php echo $nom; ?>" />
+                    <input class="inp-form" type="password" id="com_mdp" name="com_mdp" placeholder="<?php echo getTranslation("Mot de passe") ?>"/>
+                    <input class="inp-form" type="password" id="com_mdp2" name="com_mdp2" placeholder="<?php echo getTranslation("Confirmation du mot de passe") ?>"/>
                     <?php 
                         if (isset($prenom_message)) {
                             echo "<p class='error-message'>$prenom_message</p>";
@@ -109,7 +111,7 @@
                             echo "<p class='error-message'>$motDePasseVerif_message</p>";
                         }
                     ?>
-                    <button type="submit" class="btn-form">Modifier</button>
+                    <button type="submit" class="btn-form"><?php echo getTranslation("Modifier") ?></button>
                 </form>
             </div>
         </div>

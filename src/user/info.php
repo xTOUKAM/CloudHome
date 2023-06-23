@@ -2,6 +2,9 @@
     // On démarre la session
     session_start();
 
+    // On inclut les fichiers de traduction
+    require("../config/language.php");
+
     // On inclut le fichier de connexion à la base de données
     require_once("../config/bdd.php");
 
@@ -34,9 +37,9 @@
 
         // On vérifie si l'utilisateur est un administrateur
         if($com_admin == 1) {
-            $com_admin_message = "Administrateur";
+            $com_admin_message = getTranslation("Administrateur");
         } else {
-            $com_admin_message = "Utilisateur";
+            $com_admin_message = getTranslation("Utilisateur");
         }
         ?>
 
@@ -54,14 +57,14 @@
                 ?>
 
                 <div class="info-first">
-                    <h1>Informations du compte</h1>
-                    <p><strong>Nom :</strong> <?php echo $nom; ?></p>
-                    <p><strong>Prénom :</strong> <?php echo $prenom; ?></p>
-                    <p><strong>Mail :</strong> <?php echo $email; ?></p>
-                    <p><strong>Type d'utilisateur :</strong> <?php echo $com_admin_message; ?></p>
-                    <button class="btn-form" type="button"><a href="./modifAccount.php?mail=<?php echo $email ?>">Modifier les informations du compte</a></button>
+                    <h1><?php echo getTranslation("Informations du compte") ?></h1>
+                    <p><strong><?php echo getTranslation("Nom") ?> :</strong> <?php echo $nom; ?></p>
+                    <p><strong><?php echo getTranslation("Prénom") ?> :</strong> <?php echo $prenom; ?></p>
+                    <p><strong><?php echo getTranslation("Mail") ?> :</strong> <?php echo $email; ?></p>
+                    <p><strong><?php echo getTranslation("Type d'utilisateur") ?> :</strong> <?php echo $com_admin_message; ?></p>
+                    <button class="btn-form" type="button"><a href="./modifAccount.php?mail=<?php echo $email ?>"><?php echo getTranslation("Modifier les informations du compte") ?></a></button>
                     <!-- Bouton pour détruire la session -->
-                    <button class="btn-form" type="button"><a href="./destroySession.php">Se déconnecter</a></button>
+                    <button class="btn-form" type="button"><a href="./destroySession.php"><?php echo getTranslation("Se déconnecter") ?></a></button>
                 </div>
                 <footer>
                     <?php
