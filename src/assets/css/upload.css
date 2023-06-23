@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    background-color: #edeef2;
+    transition: background-color 0.3s ease;
+}
+
+.drag-area {
+    border: 2px dashed #444;
+    height: 500px;
+    width: 700px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.drag-area.active {
+    border: 2px solid #444;
+}
+
+.drag-area .icon {
+    font-size: 100px;
+    color: #444;
+}
+
+.drag-area .icon {
+    font-size: 100px;
+    color: #444;
+}
+
+.drag-area header {
+    font-size: 30px;
+    font-weight: 500;
+    color: #444;
+}
+
+.drag-area span {
+    font-size: 25px;
+    font-weight: 500;
+    color: #444;
+    margin: 10px 0 15px 0;
+}
+
+.drag-area button {
+    padding: 10px 25px;
+    font-size: 20px;
+    font-weight: 500;
+    border: none;
+    outline: none;
+    background: #fff;
+    color: #444;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.drag-area button:hover {
+    background: rgb(228, 220, 220);
+}
+
+.drag-area img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+/* Responsive CSS */
+@media (max-width: 745px) {
+    .drag-area button {
+        padding: 8px 20px;
+        font-size: 18px;
+        font-weight: 450;
+    }
+
+    .drag-area {
+        height: 400px;
+        width: 450px;
+    }
+
+    .drag-area header {
+        font-size: 25px;
+        font-weight: 450;
+        color: #444;
+    }
+
+    .drag-area .icon {
+        font-size: 80px;
+    }
+}

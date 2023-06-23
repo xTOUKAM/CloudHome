@@ -9,6 +9,7 @@ services:
       - '9000:9000'
     volumes:
       - ./src:/var/www
+      - ./src/uploads:/var/www/html/uploads:delegated
     depends_on:
       - database
 
@@ -21,6 +22,7 @@ services:
       - '8080:80'
     volumes:
       - ./src:/var/www
+      - ./src/uploads:/var/www/html/uploads
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
