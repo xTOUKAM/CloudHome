@@ -9,38 +9,33 @@
     $nom = $_SESSION['com_nom'];
     $prenom = $_SESSION['com_prenom'];
 
-    if(isset($_FILES['file'])) {
-        $arr_file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
+    // On vérifie les types de fichiers autorisés
+    $arr_file_types = ['image/png', 'image/gif', 'image/jpg', 'image/jpeg'];
 
-        // On vérifie les types de fichiers autorisés
-        if (!(in_array($_FILES['file']['type'], $arr_file_types))) {
-            echo "false";
+    // On vérifie si un fichier a été envoyé
+    if(isset($_FILES['file'])) {
+        if(!(in_array($_FILES['file']['type'], $arr_file_types))) {
+            echo "Erreur : Seuls les fichiers PNG, GIF, JPG et JPEG sont autorisés.";
             return;
         }
 
-        // On crée un dossier "uploads" s'il n'existe pas dans uploads
+        // On crée un dossier "uploads" s'il n'existe pas dans src/uploads
         if (!file_exists('../uploads')) {
-            mkdir('../uploads', 0777, true);
+            mkdir('../uploads', 0777);
         }
 
         // On crée un dossier pour le membre s'il n'existe pas
         if (!is_dir("../uploads/".$nom."-".$prenom)) {
-            mkdir("../uploads/".$nom."-".$prenom, 0777, true);
+            mkdir("../uploads/".$nom."-".$prenom, 0777);
+            chmod("../uploads/".$nom."-".$prenom, 0777);
         }
 
-        $uploaded_files = [];
-        
-        // On boucle sur les fichiers téléchargés
-        foreach ($_FILES['file']['tmp_name'] as $key => $tmp_name) {
-            $filename = time().'_'.$_FILES['file']['name'][$key];
-            $destination = '../uploads/'.$nom.'-'.$prenom.'/'.$filename;
-    
-            // On déplace le fichier dans le dossier du membre
-            if (move_uploaded_file($_FILES['file']['tmp_name'][$key], $destination)) {
-                $uploaded_files[] = $destination;
-            }
-        }
-    
-        echo json_encode($uploaded_files);
+        $filename = time().'_'.$_FILES['file']['name'];
+
+        // On déplace le ou les fichiers dans le dossier uploads
+        move_uploaded_file($_FILES['file']['tmp_name'], '../uploads/'.$nom."-".$prenom.'/'.$filename);
+
+        echo '../uploads/'.$nom."-".$prenom.'/'.$filename;
+        die;
     }
 ?>

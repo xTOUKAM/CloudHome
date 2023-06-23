@@ -1,68 +1,145 @@
 // On sélectionne tous les éléments requis
-const dropArea = document.querySelector(".drag-area"),
-  dragText = dropArea.querySelector("header"),
-  button = dropArea.querySelector("button"),
-  input = dropArea.querySelector("input");
+const dropArea = document.querySelector(".drag-area");
+const dragText = dropArea.querySelector("header");
+const button = dropArea.querySelector("button");
+const input = dropArea.querySelector("input");
 
-let files = []; // Utiliser un tableau pour stocker les fichiers sélectionnés
-
-// Si l'utilisateur clique sur le bouton, le click est aussi appliqué à l'input
+// On définit une action lorsque l'utilisateur clique sur le bouton
 button.onclick = () => {
   input.click();
 };
 
+// On définit une action lorsque l'utilisateur sélectionne un fichier
 input.addEventListener("change", function () {
-  // On récupère les fichiers sélectionnés
-  files = [...this.files];
+  // On récupère tous les fichiers sélectionnés par l'utilisateur
+  const files = this.files;
   dropArea.classList.add("active");
+  showFiles(files);
+  uploadFiles(files);
 });
 
-// Si l'utilisateur glisse des fichiers sur la zone de drop
+// Si l'utilisateur glisse un ou plusieurs fichiers sur la zone de drop
 dropArea.addEventListener("dragover", (event) => {
-    event.preventDefault(); // On empêche le comportement par défaut
-    dropArea.classList.add("active");
-    dragText.textContent = "Relâchez pour déposer les fichiers";
+  event.preventDefault();
+  dropArea.classList.add("active");
+  dragText.textContent = "Relâcher les fichiers ici";
 });
 
 // Si l'utilisateur quitte la zone de drop
 dropArea.addEventListener("dragleave", () => {
-    dropArea.classList.remove("active");
-    dragText.textContent = "Glissez et déposez les fichiers ici";
+  dropArea.classList.remove("active");
+  dragText.textContent = "Glisser et déposer les fichiers ici";
 });
 
-// Si l'utilisateur dépose des fichiers dans la zone de drop
+// Si l'utilisateur dépose le ou les fichiers sur la zone de drop
 dropArea.addEventListener("drop", (event) => {
-    event.preventDefault(); // On empêche le comportement par défaut
-    // On récupère les fichiers sélectionnés
-    files = [...event.dataTransfer.files];
-    dropArea.classList.add("active");
-    js_file_upload(files);
+  event.preventDefault();
+  // On récupère tous les fichiers sélectionnés par l'utilisateur
+  const files = event.dataTransfer.files;
+  dropArea.classList.add("active");
+  showFiles(files);
+  uploadFiles(files);
 });
 
-// On créé la fonction pour uploader les fichiers
-function upload_files(event) {
-  event.preventDefault();
+// Affiche les fichiers sélectionnés
+function showFiles(files) {
+  let messageShown = false; // Indicateur pour vérifier si le message a déjà été affiché
   for (let i = 0; i < files.length; i++) {
-    js_file_upload(files[i]);
+    const file = files[i];
+    let fileType = file.type;
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+    if (validExtensions.includes(fileType) && !messageShown) {
+      // Afficher une popup pour les fichiers image
+      messageShown = true; // Met à jour l'indicateur pour n'afficher qu'une seule fois
+      showPopup(`Le fichier "${file.name}" est une image.`);
+    } else if (!messageShown) {
+      // Afficher une popup pour les fichiers non-image
+      messageShown = true; // Met à jour l'indicateur pour n'afficher qu'une seule fois
+      showPopup(`Le fichier "${file.name}" n'est pas une image.`);
+    }
   }
 }
 
-// On créé la fonction js_file_upload
-function js_file_upload(file) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("POST", "sql/post_upload.php", true);
-    xhr.onload = () => {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                let response = xhr.response;
-                dropArea.innerHTML += response;
-            }
-        }
+function showFiles(files) {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    let fileType = file.type;
+    let validExtensions = ["image/jpeg", "image/jpg", "image/png"];
+    if (validExtensions.includes(fileType)) {
+      let fileReader = new FileReader();
+      fileReader.onload = () => {
+        showPopup("Fichier téléchargé avec succès");
+      };
+      fileReader.readAsDataURL(file);
+    } else {
+      showPopup("Format de fichier non valide");
     }
-    let formData = new FormData();
-    formData.append("file", file);
-    xhr.send(formData);
+  }
 }
 
-// On ajoute un événement au bouton pour uploader les fichiers
-button.addEventListener("click", upload_files);
+// On définit une action lorsque l'utilisateur clique sur le bouton "Upload"
+function showPopup(message) {
+  const popupContainer = document.getElementById('popupContainer');
+  const popupMessage = document.getElementById('popupMessage');
+  popupMessage.textContent = message;
+  popupContainer.style.display = 'flex';
+  setTimeout(() => {
+    popupContainer.style.display = 'none';
+  }, 15000); // Disparaît après 2 secondes (ajuster la durée selon vos besoins)
+}
+
+// Sélection du bouton de fermeture et de la popup
+const closeButton = document.getElementById("closeButton");
+const popupContainer = document.getElementById("popupContainer");
+
+// Fonction pour fermer la popup
+function closePopup() {
+  popupContainer.style.display = "none";
+}
+
+// Écouteur d'événement pour le clic sur le bouton de fermeture
+closeButton.addEventListener("click", closePopup);
+
+// Fonction pour faire disparaître la popup
+function hidePopup() {
+  const popup = document.querySelector('.popup-container');
+  popup.classList.add('fade-out');
+  setTimeout(() => {
+    popup.style.display = 'none';
+    popup.classList.remove('fade-out');
+  }, 300); // Temps de la transition en millisecondes
+}
+
+// On définit une action lorsque l'utilisateur clique sur le bouton "Upload"
+function uploadFiles(files) {
+  for (let i = 0; i < files.length; i++) {
+    const file = files[i];
+    js_file_upload(file);
+  }
+}
+
+// On définit une fonction file_browse
+function file_browse() {
+  document.getElementById("file").onchange = function () {
+    // On récupère tous les fichiers sélectionnés par l'utilisateur
+    const files = this.files;
+    uploadFiles(files);
+  };
+}
+
+// On définit une fonction js_file_upload
+function js_file_upload(file) {
+  if (file != undefined) {
+    var form_data = new FormData();
+    form_data.append("file", file);
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../../sql/post_upload.php", true);
+    xhttp.onload = function (event) {
+      if (xhttp.status == 200) {
+        var response = event.target.responseText;
+        // Traitez la réponse ici
+      }
+    };
+    xhttp.send(form_data);
+  }
+}

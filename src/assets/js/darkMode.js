@@ -69,7 +69,16 @@ const enableDarkMode = () => {
         }
 
         .drag-area button {
+            border: 1px solid #444;
             background-color: #444;
+            color: #fff;
+        }
+
+        .popup {
+            background-color: #444;
+        }
+
+        .popup p {
             color: #fff;
         }
     `;

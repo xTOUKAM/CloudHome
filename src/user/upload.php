@@ -1,6 +1,13 @@
 <?php
     // On démarre la session
     session_start();
+
+    // On vérifie si l'utilisateur est connecté
+    if(!isset($_SESSION["com_nom"])){
+        // Si non, on le redirige vers la page de connexion
+        header("Location: ../user/login.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +25,14 @@
             require("../includes/header.php");
         ?>
 
-        <div class="drag-area" ondrop="upload_file(event)" ondragover="return false">
+        <div style ="display: none;"class="popup-container" id="popupContainer">
+        <div class="popup">
+            <p id="popupMessage">Message de la popup</p>
+            <button id="closeButton" type="button">Fermer</button>
+        </div>
+        </div>
+
+        <div class="drag-area" ondrop="upload_file(e)" ondragover="return false">
             <div class="icon"><i class="lni lni-cloud-upload"></i></div>
             <header>Glissez et déposez pour télécharger le fichier</header>
             <span>OU</span>
