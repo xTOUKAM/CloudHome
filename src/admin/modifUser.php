@@ -2,6 +2,9 @@
     // Connexion à la base de données
     require_once("../config/bdd.php");
 
+    // On inclut le fichier de traduction
+    require_once("../config/language.php");
+
     // On vérifie que le compte est un administrateur
     require_once("../sql/verifAdmin.php");
 
@@ -36,12 +39,12 @@
     if(isset($mail)) {
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel=stylesheet href="../assets/css/inc.css">
-        <title>Modifier compte</title>
+        <title><?php echo getTranslation("Modifier compte"); ?></title>
     </head>
     <body>
         <?php
@@ -50,11 +53,11 @@
         <div class="container">
             <div class="form-container sign-in-container">
                 <form action="modifUser.php" method="post">
-                    <h1>Modifier compte</h1>
-                    <input class="inp-form" type="text" name="prenom" placeholder="Prénom" value="<?php echo $com_prenom; ?>" required>
-                    <input class="inp-form" type="text" name="nom" placeholder="Nom" value="<?php echo $com_nom; ?>" required>
-                    <input class="inp-form" type="email" name="mail" placeholder="Email" value="<?php echo $mail; ?>" required>
-                    <button class="btn-form" type="submit">Modifier</button>
+                    <h1><?php echo getTranslation("Modifier compte"); ?></h1>
+                    <input class="inp-form" type="text" name="prenom" placeholder="<?php echo getTranslation("Prénom"); ?>" value="<?php echo $com_prenom; ?>" required>
+                    <input class="inp-form" type="text" name="nom" placeholder="<?php echo getTranslation("Nom"); ?>" value="<?php echo $com_nom; ?>" required>
+                    <input class="inp-form" type="email" name="mail" placeholder="<?php echo getTranslation("Mail"); ?>" value="<?php echo $mail; ?>" required>
+                    <button class="btn-form" type="submit"><?php echo getTranslation("Modifier"); ?></button>
                 </form>
             </div>
         </div>
@@ -67,5 +70,5 @@
 </html>
 
 <?php } else { ?>
-    <p>Aucun client sélectionné</p>
+    <p><?php echo getTranslation("Aucun client sélectionné"); ?></p>
 <?php } ?>

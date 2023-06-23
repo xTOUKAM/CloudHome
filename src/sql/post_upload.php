@@ -2,6 +2,9 @@
     // On démarre une session
     session_start();
 
+    // On inclut le fichier de langue
+    require_once("../config/language.php");
+
     // On inclut la connexion à la base
     require_once("../config/bdd.php");
 
@@ -16,7 +19,7 @@
     // On vérifie si un fichier a été envoyé
     if(isset($_FILES['file'])) {
         if(!(in_array($_FILES['file']['type'], $arr_file_types))) {
-            echo "Erreur : Seuls les fichiers PNG, GIF, JPG et JPEG sont autorisés.";
+            echo getTranslation("Erreur : Seuls les fichiers PNG, GIF, JPG et JPEG sont autorisés.");
             return;
         }
 

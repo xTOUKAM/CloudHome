@@ -2,6 +2,9 @@
     // On démarre la session
     session_start();
 
+    // On inclut les fichiers de traduction
+    require("../config/language.php");
+
     // On vérifie si l'utilisateur est connecté
     if(!isset($_SESSION["com_nom"])){
         // Si non, on le redirige vers la page de connexion
@@ -17,7 +20,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="../assets/css/inc.css">
         <link rel="stylesheet" href="../assets/css/upload.css">
-        <title>Envoyer des fichiers</title>
+        <title><?php echo getTranslation('Envoyer des fichiers'); ?></title>
     </head>
     <body>
         <?php 
@@ -34,9 +37,9 @@
 
         <div class="drag-area" ondrop="upload_file(e)" ondragover="return false">
             <div class="icon"><i class="lni lni-cloud-upload"></i></div>
-            <header>Glissez et déposez pour télécharger le fichier</header>
-            <span>OU</span>
-            <button>Parcourir</button>
+            <header><?php echo getTranslation("Glissez et déposez pour télécharger le fichier"); ?></header>
+            <span><?php echo getTranslation('OU'); ?></span>
+            <button><?php echo getTranslation("Parcourir"); ?></button>
             <input type="file" name="file" id="file" multiple hidden>
         </div>
 

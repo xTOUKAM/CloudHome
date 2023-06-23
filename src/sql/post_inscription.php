@@ -2,6 +2,9 @@
     // On inclut le fichier de connexion à la base de données
     require_once("../config/bdd.php");
 
+    // On inclut le fichier de langue
+    require_once("../config/language.php");
+
     // On initialise les variables
     $prenom = $_POST["prenom"];
     $nom = $_POST["nom"];
@@ -93,6 +96,6 @@
         header("Location: ../user/login.php");
         
     } else {
-        echo "Les variables ne sont pas renseignées !";
+        echo getTranslation("Les variables ne sont pas renseignées !");
     }
 ?>

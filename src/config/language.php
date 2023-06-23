@@ -3,7 +3,7 @@
     // On créer une fonction qui traduit les mots
     function getTranslation($key) {
         $lang = "en-EN";
-        $file = "lang/" . strtolower($lang) . ".php";
+        $file = __DIR__ . '/../lang/' . $lang . ".php";
 
         if(file_exists($file)) {
             $translations = include $file;
