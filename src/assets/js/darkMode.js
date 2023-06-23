@@ -51,6 +51,36 @@ const enableDarkMode = () => {
         .inp-form::placeholder {
             color: #fff;
         }
+
+        .drag-area .icon{
+            color: #fff;
+        }
+
+        .drag-area header {
+            color: #fff;
+        }
+
+        .drag-area span {
+            color: #fff;
+        }
+
+        .drag-area {
+            border: 2px dashed #fff;
+        }
+
+        .drag-area button {
+            border: 1px solid #444;
+            background-color: #444;
+            color: #fff;
+        }
+
+        .popup {
+            background-color: #444;
+        }
+
+        .popup p {
+            color: #fff;
+        }
     `;
 
     // Stocke l'état du mode sombre dans le localStorage

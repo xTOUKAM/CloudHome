@@ -22,11 +22,9 @@
                 }
                 ?>
                 <li><a class="a-header-footer" href="<?php echo getRelativePath('../user/login.php'); ?>"><i class="lni lni-user"></i></a></li>
-                <?php
-                if ($com_mail != "") {
-                    echo '<li><a class="a-header-footer" href="#"><i class="lni lni-image"></i></a></li>';
-                }
-                ?>
+                <?php if ($com_mail != "") { ?>
+                    <li><a class="a-header-footer" href="<?php echo getRelativePath('../user/upload.php') ?>"><i class="lni lni-image"></i></a></li>
+                <?php } ?>
                 <li><a class="a-header-footer" href="<?php echo getRelativePath('../others/mail.php'); ?>"><i class="lni lni-hand"></i></a></li>
             </ul>
         </div>
