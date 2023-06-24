@@ -40,6 +40,14 @@ CloudHome is written in PhP and uses MySQL as its database. It can be installed 
 
 If you want to get the administrator role, open your database, go to the panel and pass the value of your account from `0` to `1` in the `cli_admin column`
 
+### How to connect to the database
+1. Go to `http://localhost:8081/`
+2. Enter the server name `mysql`
+3. Enter the username `root`
+4. Enter the password `dev`
+
+You can change the password the name of your database and password in the `.env` file.
+
 ## License
 
 CloudHome is licensed under the [MIT Licence](./LICENCE).
