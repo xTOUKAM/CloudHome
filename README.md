@@ -20,33 +20,25 @@ CloudHome is a cloud storage service for your home. It allows you to store files
 
 ## Installation
 
-CloudHome is written in PhP and uses MySQL as its database. It can be installed on any web server that supports PhP and MySQL. It has been tested on Linux and Windows.
+CloudHome is written in PhP and uses MySQL as its database. It can be installed on any web server that supports Docker. It has been tested on Linux and Windows.
 
 ### Requirements
 
-* Web server (Apache, Nginx, etc.)
-* PhP 5.6 or higher
-* MySQL 5.5 or higher
-* OpenSSL 1.0.1 or higher
-* PHP OpenSSL extension
-* PHP PDO extension
-* PHP PDO MySQL extension
-* PHP GD extension
-* PHP Mcrypt extension
-* PHP Mbstring extension
-* PHP Zip extension
-* PHP XML extension
-* PHP Ctype extension
-* PHP JSON extension
+* Visual Studio Code
+* Docker
+* MySQL
+* PHP
 
 ### Installation steps
 
 1. Download the latest release from the [releases page](https://github.com/xTOUKAM/CloudHome)
 2. Unzip the downloaded file
-3. Upload the contents of the `Cloudhome` folder to your web server
-4. In your MySQL database import the `cloudhome.sql` file
+3. After your download open the folder in Visual Studio Code and run the command `docker-compose up`
+4. In your MySQL database import the `panel.sql` file
 5. Open the `index.php` file in your web browser
 6. It's done! Create your account and start using CloudHome
+
+If you want to get the administrator role, open your database, go to the panel and pass the value of your account from `0` to `1` in the `cli_admin column`
 
 ## License
 
