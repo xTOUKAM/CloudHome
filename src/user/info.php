@@ -2,6 +2,11 @@
     // On démarre la session
     session_start();
 
+    // Vérification de la connexion de l'utilisateur
+    if(!isset($_SESSION["com_mail"])) {
+        header("Location: ../index.php");
+    }
+
     // On inclut les fichiers de traduction
     require("../config/language.php");
 

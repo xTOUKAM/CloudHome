@@ -81,6 +81,14 @@ const enableDarkMode = () => {
         .popup p {
             color: #fff;
         }
+
+        .popup-content {
+            background-color: #444;
+        }
+
+        .popup-content h2 {
+            color: #fff;
+        }
     `;
 
     // Stocke l'état du mode sombre dans le localStorage
