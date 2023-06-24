@@ -1,6 +1,11 @@
 <?php
     session_start();
 
+    // Vérification de la connexion de l'utilisateur
+    if (!isset($_SESSION["com_mail"])) {
+        header("Location: ../index.php");
+    }
+
     require("../config/language.php");
     require_once("../config/bdd.php");
         
