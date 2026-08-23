@@ -54,7 +54,7 @@ CloudHome is licensed under the [MIT Licence](./LICENCE).
 
 ## Contact
 
-If you have any questions or suggestions, send me an email at [My Email](mailto:houllegatte.tom@gmail.com).
+If you have any questions or suggestions, send me an email at [this email](mailto:houllegatte.tom@gmail.com).
 
 ## Donate
 
